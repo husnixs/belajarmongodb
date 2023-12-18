@@ -12,7 +12,42 @@ $col        = $db->tblog;
 
 //echo "Inserted with Object ID '{$result->getInsertedId()}'";
 
-$count = $col->count
+$find       = $col->find(
+    [
+        'username'  => 'HymanParisianMD'
+    ],
+    [
+    'projection' => [
+        'username' => 1, '_id' => 1
+    ],
+    'limit' => 2
+    ]
+);
+
+
+$dd = [];
+foreach($find as $d){
+
+    $dd[] = [
+        'id'    => $d->_id,
+        'user'  => $d->username
+    ];
+
+}
+
+print_r($dd);
+
+exit;
+
+$count = $col->count([
+    'limit' => 5,
+    'projection' => [
+        'username' => 1,
+        'namaLengkap' => 1
+    ],
+]);
+
+echo $count;
 
 exit;
 
